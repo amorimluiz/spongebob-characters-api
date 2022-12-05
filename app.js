@@ -85,6 +85,6 @@ app.delete("/delete-character/:id", (req, res) => {
   })
 })
 
-app.listen(80, () => {
-  console.log("Servidor iniciado na porta 80")
+app.listen(443, () => {
+  console.log("Servidor iniciado na porta 443")
 })
