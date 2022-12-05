@@ -85,4 +85,6 @@ app.delete("/delete-character/:id", (req, res) => {
   })
 })
 
-app.listen(8080)
+app.listen(8080, () => {
+  console.log("Servidor iniciado na porta 8080")
+})
