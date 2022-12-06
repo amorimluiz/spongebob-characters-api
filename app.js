@@ -10,6 +10,7 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+
   app.use(cors())
   next()
 })
@@ -40,16 +41,15 @@ app.post("/add-character", (req, res) => {
 
 app.get("/character/:id", (req, res) => {
   const data = JSON.parse(fs.readFileSync(url))
+  let character
   data.characters.map(char => {
     if(char.id == req.params.id){
-      return res.status(200).json(char)
+      character = char
     }
   })
-  return res.status(400).json({
-    error: true,
-    message: 'Personagem não encontrado'
-  })
+  return res.status(200).json(character)
 })
+
 
 app.put("/att-character/:id", (req, res) => {
   const data = JSON.parse(fs.readFileSync(url))
@@ -57,15 +57,16 @@ app.put("/att-character/:id", (req, res) => {
   const char = data.characters[Number(pos)]
   const reqChar = req.body
   for(property in reqChar){
-    if(reqChar[`${property}`] != "" && reqChar[`${property}`] != null){
+    if(reqChar[`${property}`] != "" || reqChar[`${property}`] != null){
       char[`${property}`] = reqChar[`${property}`]
     }
   }
+  data.characters[pos] = char
   write(data)
   return res.status(200).json({
     error: false,
     message: "Personagem foi atualizado com sucesso",
-    newChar: char
+    character: char
   })
 })
 
