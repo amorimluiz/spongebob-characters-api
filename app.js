@@ -52,7 +52,7 @@ app.get("/character/:id", (req, res) => {
 
 app.put("/att-character/:id", (req, res) => {
   const data = JSON.parse(fs.readFileSync(url))
-  const pos = req.params.id - 1
+  const pos = Number(req.params.id - 1)
   const char = data.characters[Number(pos)]
   const reqChar = req.body
   for(property in reqChar){
