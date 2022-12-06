@@ -1,0 +1,12 @@
+{
+  "characters": [
+  {
+    "id": 1,
+    "name": "Bob Esponja",
+    "gender": "Masculino",
+    "specie": "Esponja do Mar",
+    "profession": "Chapeiro",
+    "appearances": 277,
+    "alive": true
+  }
+]}
