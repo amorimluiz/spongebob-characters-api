@@ -53,7 +53,7 @@ app.get("/character/:id", (req, res) => {
 
 app.put("/att-character/:id", (req, res) => {
   const data = JSON.parse(fs.readFileSync(url))
-  const pos = Number(req.params.id - 1)
+  const pos = req.params.id - 1
   const char = data.characters[Number(pos)]
   const reqChar = req.body
   for(property in reqChar){
@@ -61,12 +61,11 @@ app.put("/att-character/:id", (req, res) => {
       char[`${property}`] = reqChar[`${property}`]
     }
   }
-  reqChar['id'] = req.params.id
-  data.characters[Number(pos)] = reqChar
   write(data)
   return res.status(200).json({
     error: false,
-    message: "Personagem foi atualizado com sucesso"
+    message: "Personagem foi atualizado com sucesso",
+    newChar: char
   })
 })
 
