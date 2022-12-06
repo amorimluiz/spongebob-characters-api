@@ -29,6 +29,7 @@ app.post("/add-character", (req, res) => {
   const data = JSON.parse(fs.readFileSync(url))
   const proxId = data.characters.length + 1
   req.body['id'] = proxId
+  parseInt(req.body['appearances'])
   data.characters.push(req.body)
   write(data)
   return res.status(200).json({
